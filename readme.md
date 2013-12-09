@@ -22,10 +22,15 @@ Now require it in your files like so:
 var filesize = require('file-size');
 ```
 
-### Usage (`filesize(Number bytes, Object options)`)
+## Usage
+
+```javascript
+filesize(Number bytes, Object options)
+```
 
 Using filesize is very easy, a lot easier if you know the [Specification Table](http://en.wikipedia.org/wiki/Template:Quantities_of_bytes). However,
 it's not required to know it, and in most cases you won't need it.
+
 
 **Initialization**
 
@@ -47,7 +52,11 @@ var converter = filesize(186457865, {
 - `fixed` - Number of positions after the decimal to show, default is `2`
 - `spacer` - Space between the number and the unit, default is a space (` `)
 
-#### Human Readable (`.human(Object spec)`)
+#### Human Readable 
+
+```javascript
+filesize.human(Object spec)
+```
 
 ##### IEC Specification
 
@@ -80,14 +89,22 @@ The rest are in `iB` notation, as per JEDEC Specification.
 filesize(186457865).human({ jedec: true });
 ```
 
-#### Conversion (`.to(String unit, Boolean si)`)
+#### Conversion 
+
+```javascript
+.to(String unit, Boolean si)
+```
+
+##### IEC Specification
+
+*Default*
 
 ```javascript
 // outputs: 177.82
 filesize(186457865).to('MB');
 ```
 
-For `SI`
+##### SI Specification
 
 ```javascript
 // outputs: 186.46
