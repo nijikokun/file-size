@@ -34,6 +34,8 @@ module.exports = function (bytes, options) {
     },
 
     human: function (spec) {
+      spec = spec || {};
+      
       var algorithm = spec.si ? ['k', 'B'] : ['K', 'iB'];
       var input = sizable.calculate(spec.si);
 

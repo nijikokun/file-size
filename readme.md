@@ -50,7 +50,7 @@ var converter = filesize(186457865, {
 ```
 
 - `fixed` - Number of positions after the decimal to show, default is `2`
-- `spacer` - Space between the number and the unit, default is a space (` `)
+- `spacer` - Space between the number and the unit, default is a space ` `
 
 #### Human Readable 
 
@@ -80,7 +80,7 @@ filesize(186457865).human({ si: true });
 
 ##### JEDEC Specification
 
-Changes IEC default unit notation `iB` to `B` for the following: `KB`, `MB`, 'GB'
+Changes IEC default unit notation `iB` to `B` for the following: `KB`, `MB`, `GB`
 
 The rest are in `iB` notation, as per JEDEC Specification.
 
