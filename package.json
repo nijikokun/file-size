@@ -1,0 +1,23 @@
+{
+  "name": "file-size",
+  "version": "0.0.1",
+  "description": "Lightweight filesize to human-readable / proportions w/o dependencies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "filesize",
+    "file",
+    "size",
+    "bytes",
+    "human",
+    "readable",
+    "iec",
+    "si",
+    "jedec"
+  ],
+  "repository": "git://github.com/Nijikokun/file-size.git",
+  "author": "Nijiko Yonskai <nijikokun@gmail.com>",
+  "license": "MIT"
+}
