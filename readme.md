@@ -57,7 +57,7 @@ Power of `1024`
 
 ```javascript
 // outputs: 177.82 MiB
-console.log(filesize(186457865).human());
+filesize(186457865).human();
 ```
 
 ##### SI Specification
@@ -66,7 +66,7 @@ Power of `1000`
 
 ```javascript
 // outputs: 186.46 MB
-console.log(filesize(186457865).human({ si: true }));
+filesize(186457865).human({ si: true });
 ```
 
 ##### JEDEC Specification
@@ -77,19 +77,19 @@ The rest are in `iB` notation, as per JEDEC Specification.
 
 ```javascript
 // outputs: 186.46 MB
-console.log(filesize(186457865).human({ jedec: true }));
+filesize(186457865).human({ jedec: true });
 ```
 
 #### Conversion (`.to(String unit, Boolean si)`)
 
 ```javascript
 // outputs: 177.82
-console.log(filesize(186457865).to('MB');
+filesize(186457865).to('MB');
 ```
 
 For `SI`
 
 ```javascript
 // outputs: 186.46
-console.log(filesize(186457865).to('MB', true);
+filesize(186457865).to('MB', true);
 ```
