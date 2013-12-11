@@ -1,5 +1,7 @@
 # File-size.js
 
+![filesize](http://puu.sh/5JspS.png)
+
 File-size module for node.js for converting, manipulating, and handling file-sizes.
 
 
