@@ -47,7 +47,6 @@
     return sizable;
   };
 
-  // Module Exporting
   if (typeof module !== 'undefined' && module.exports) {
     return module.exports = filesize;
   } else if (typeof define === 'function' && define.amd) {
