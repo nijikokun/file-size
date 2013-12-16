@@ -50,15 +50,19 @@
     return sizable;
   };
 
-  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-    module.exports = filesize;
-  } else {
-    if (typeof define === 'function' && define.amd) {
-      define([], function() {
-        return filesize;
-      });
-    } else {
-      window.filesize = filesize;
-    }
+  //commonjs/nodejs module
+  if (typeof module !== 'undefined' && module.exports) {
+    return module.exports = filesize;
   }
-})();
+  
+  //amd module
+  if (typeof define === 'function' && define.amd) {
+    return define([], function() {
+      return filesize;
+    });
+  }
+  
+  //browser binding
+  this.filesize = filesize;
+  
+}());
