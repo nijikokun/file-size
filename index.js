@@ -37,10 +37,11 @@
         spec = spec || {};
         
         var algorithm = spec.si ? ['k', 'B'] : ['K', 'iB']
-          , input = sizable.calculate(spec.si);
+          , input = sizable.calculate(spec.si)
+          , magnitudeIndex = input.magnitude - 1;
 
-        if (--input.magnitude < 2 && !spec.si && spec.jedec) algorithm[1] = 'B';
-        return input.fixed + options.spacer + (input.magnitude ? (algorithm[0] + 'MGTPEZY')[input.magnitude] + algorithm[1] : 'Bytes');
+        if (magnitudeIndex < 2 && !spec.si && spec.jedec) algorithm[1] = 'B';
+        return input.fixed + options.spacer + (input.magnitude ? (algorithm[0] + 'MGTPEZY')[magnitudeIndex] + algorithm[1] : 'Bytes');
       }
     };
 
