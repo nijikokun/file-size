@@ -39,13 +39,13 @@ it's not required to know it, and in most cases you won't need it.
 Filesize works in a jQuery chainable manner so you can use multiple instances without trouble.
 
 ```javascript
-var converter = filesize(186457865);
+var size = filesize(186457865);
 ```
 
 **Options**
 
 ```javascript
-var converter = filesize(186457865, {
+var size = filesize(186457865, {
   fixed: 2,
   spacer: ' '
 });
@@ -54,10 +54,10 @@ var converter = filesize(186457865, {
 - `fixed` - Number of positions after the decimal to show, default is `2`
 - `spacer` - Space between the number and the unit, default is a space ` `
 
-#### Human Readable 
+### Human Readable
 
 ```javascript
-filesize.human(Object spec)
+<Filesize Object>.human(Object spec)
 ```
 
 ##### IEC Specification
@@ -91,10 +91,10 @@ The rest are in `iB` notation, as per JEDEC Specification.
 filesize(186457865).human({ jedec: true });
 ```
 
-#### Conversion 
+### Conversion
 
 ```javascript
-.to(String unit, Boolean si)
+<Filesize Object>.to(String unit, Boolean si)
 ```
 
 ##### IEC Specification

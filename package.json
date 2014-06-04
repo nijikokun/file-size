@@ -1,6 +1,6 @@
 {
   "name": "file-size",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Lightweight filesize to human-readable / proportions w/o dependencies.",
   "main": "index.js",
   "scripts": {
