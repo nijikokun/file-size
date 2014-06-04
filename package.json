@@ -1,10 +1,10 @@
 {
   "name": "file-size",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Lightweight filesize to human-readable / proportions w/o dependencies.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter dot --check-leaks test/"
   },
   "keywords": [
     "filesize",
@@ -19,5 +19,9 @@
   ],
   "repository": "git://github.com/Nijikokun/file-size.git",
   "author": "Nijiko Yonskai <nijikokun@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^1.20.1",
+    "should": "^4.0.1"
+  }
 }

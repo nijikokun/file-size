@@ -35,13 +35,13 @@
 
       human: function (spec) {
         spec = spec || {};
-        
+
         var algorithm = spec.si ? ['k', 'B'] : ['K', 'iB']
           , input = sizable.calculate(spec.si)
-          , magnitudeIndex = input.magnitude - 1;
+          , magnitude = input.magnitude - 1;
 
-        if (magnitudeIndex < 2 && !spec.si && spec.jedec) algorithm[1] = 'B';
-        return input.fixed + options.spacer + (input.magnitude ? (algorithm[0] + 'MGTPEZY')[magnitudeIndex] + algorithm[1] : 'Bytes');
+        if (magnitude < 3 && !spec.si && spec.jedec) algorithm[1] = 'B';
+        return input.fixed + options.spacer + (input.magnitude ? (algorithm[0] + 'MGTPEZY')[magnitude] + algorithm[1] : (input.fixed && input.fixed|0 === 1 ? 'Byte' : 'Bytes'));
       }
     };
 
