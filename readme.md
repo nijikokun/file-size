@@ -54,11 +54,14 @@ var size = filesize(186457865, {
 - `fixed` - Number of positions after the decimal to show, default is `2`
 - `spacer` - Space between the number and the unit, default is a space ` `
 
-### Human Readable
+### size.human(String spec) -> String
 
-```javascript
-<Filesize Object>.human(Object spec)
-```
+Generates human readable filesize.
+
+- `spec` can be one of the following:
+  - `si`
+  - `iec`
+  - `jedec`
 
 ##### IEC Specification
 
@@ -77,7 +80,7 @@ Power of `1000`
 
 ```javascript
 // outputs: 186.46 MB
-filesize(186457865).human({ si: true });
+filesize(186457865).human('si');
 ```
 
 ##### JEDEC Specification
@@ -88,14 +91,19 @@ The rest are in `iB` notation, as per JEDEC Specification.
 
 ```javascript
 // outputs: 186.46 MB
-filesize(186457865).human({ jedec: true });
+filesize(186457865).human('jedec');
 ```
 
-### Conversion
+### size.to(String unit, String spec) -> String
 
-```javascript
-<Filesize Object>.to(String unit, Boolean si)
-```
+Converts `bytes` to another filesize `unit`
+
+- `unit` of size can be one of the following:
+  - `B`, `KB`, `MB`, `GB`, `TB`, `PB`, `EB`, `ZB`, `YB`
+- `spec` can be one of the following:
+  - `si`
+  - `iec`
+  - `jedec`
 
 ##### IEC Specification
 
@@ -111,4 +119,29 @@ filesize(186457865).to('MB');
 ```javascript
 // outputs: 186.46
 filesize(186457865).to('MB', true);
+```
+
+### size.calculate(String spec) -> Object
+
+Calculates suffix, magnitude, fixed, non-fixed, bits (fixed, non-fixed) from specified bytes against the specified `spec`.
+
+- `spec` can be one of the following:
+  - `si`
+  - `iec`
+  - `jedec`
+
+```js
+/*
+ * outputs:
+ *
+ *    {
+ *      suffix: 'Bytes',
+ *      magnitude: 0,
+ *      result: 8,
+ *      fixed: '8.00',
+ *      bits: { result: 1, fixed: '1.00' }
+ *    }
+*/
+
+var result = filesize(8).calculate()
 ```

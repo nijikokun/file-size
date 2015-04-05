@@ -1,10 +1,11 @@
 {
   "name": "file-size",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Lightweight filesize to human-readable / proportions w/o dependencies.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter dot --check-leaks test/"
+    "test": "make test",
+    "coverage": "make coverage"
   },
   "keywords": [
     "filesize",
@@ -15,12 +16,16 @@
     "readable",
     "iec",
     "si",
-    "jedec"
+    "jedec",
+    "filesystem",
+    "humanize",
+    "numbers"
   ],
   "repository": "git://github.com/Nijikokun/file-size.git",
   "author": "Nijiko Yonskai <nijikokun@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "istanbul": "^0.3.13",
     "mocha": "^1.20.1",
     "should": "^4.0.1"
   }

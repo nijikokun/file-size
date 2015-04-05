@@ -1,60 +1,58 @@
-// File-Size | 0.0.3 | MIT | Nijiko Yonskai <nijikokun@gmail.com> | 2013
-(function () {
-  var filesize = function (bytes, options) {
-    bytes = typeof bytes == 'number' ? bytes : 0;
+// File-Size | 1.0.0 | MIT | Nijiko Yonskai <nijikokun@gmail.com> | 2015
+(function (plugin) {
+  /* istanbul ignore next: differing implementations */
+  if (typeof module !== 'undefined' && module.exports) return module.exports = plugin()
+  else if (typeof define === 'function' && define.amd) return define([], plugin)
+  else this.filesize = plugin()
+})(function () {
+  var units = 'BKMGTPEZY'.split('')
+  function equals (a, b) { return a && a.toLowerCase() === b.toLowerCase() }
 
-    options = options || {};
-    options.fixed = typeof options.fixed == 'number' ? options.fixed : 2;
-    options.spacer = typeof options.spacer == 'string' ? options.spacer : ' ';
+  return function filesize (bytes, options) {
+    bytes = typeof bytes == 'number' ? bytes : 0
+    options = options || {}
+    options.fixed = typeof options.fixed == 'number' ? options.fixed : 2
+    options.spacer = typeof options.spacer == 'string' ? options.spacer : ' '
 
-    var sizable = {
-      calculate: function (SI) {
-        var algorithm = SI ? 1e3 : 1024
-          , magnitude = Math.log(bytes) / Math.log(algorithm)|0
-          , result = (bytes / Math.pow(algorithm, magnitude));
+    options.calculate = function (spec) {
+      var type = equals(spec, 'si') ? ['k', 'B'] : ['K', 'iB']
+      var algorithm = equals(spec, 'si') ? 1e3 : 1024
+      var magnitude = Math.log(bytes) / Math.log(algorithm)|0
+      var result = (bytes / Math.pow(algorithm, magnitude))
+      var fixed = result.toFixed(options.fixed)
+      var suffix
 
-        return {
-          magnitude: magnitude,
-          result: result,
-          fixed: parseFloat(result.toFixed(options.fixed))
-        };
-      },
+      if (magnitude-1 < 3 && !equals(spec, 'si') && equals(spec, 'jedec'))
+        type[1] = 'B'
 
-      to: function (unit, si) {
-        unit = typeof unit == 'string' ? unit[0].toUpperCase() : 'B';
+      suffix = magnitude
+        ? (type[0] + 'MGTPEZY')[magnitude-1] + type[1]
+        : ((fixed|0) === 1 ? 'Byte' : 'Bytes')
 
-        var algorithm = si ? 1e3 : 1024
-          , units = 'BKMGTPEZY'.split('')
-          , position = units.indexOf(unit)
-          , result = bytes;
-
-        if (position == -1 || position == 0) return result;
-        for (; position > 0; position--) result /= algorithm;
-        return parseFloat(result.toFixed(options.fixed));
-      },
-
-      human: function (spec) {
-        spec = spec || {};
-
-        var algorithm = spec.si ? ['k', 'B'] : ['K', 'iB']
-          , input = sizable.calculate(spec.si)
-          , magnitude = input.magnitude - 1;
-
-        if (magnitude < 3 && !spec.si && spec.jedec) algorithm[1] = 'B';
-        return input.fixed + options.spacer + (input.magnitude ? (algorithm[0] + 'MGTPEZY')[magnitude] + algorithm[1] : (input.fixed && input.fixed|0 === 1 ? 'Byte' : 'Bytes'));
+      return {
+        suffix: suffix,
+        magnitude: magnitude,
+        result: result,
+        fixed: fixed,
+        bits: { result: result/8, fixed: (result/8).toFixed(options.fixed) }
       }
-    };
+    }
 
-    return sizable;
-  };
+    options.to = function (unit, spec) {
+      var algorithm = equals(spec, 'si') ? 1e3 : 1024
+      var position = units.indexOf(typeof unit == 'string' ? unit[0].toUpperCase() : 'B')
+      var result = bytes
 
-  if (typeof module !== 'undefined' && module.exports) {
-    return module.exports = filesize;
-  } else if (typeof define === 'function' && define.amd) {
-    return define([], function() {
-      return filesize;
-    });
-  } else {
-    this.filesize = filesize;
+      if (position === -1 || position === 0) return result.toFixed(2)
+      for (; position > 0; position--) result /= algorithm
+      return result.toFixed(2)
+    }
+
+    options.human = function (spec) {
+      var output = options.calculate(spec)
+      return output.fixed + options.spacer + output.suffix
+    }
+
+    return options;
   }
-}());
+})

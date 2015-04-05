@@ -7,24 +7,24 @@ var mb = 1048576
 var gb = 1073741824
 var tb = 1099511627776
 
-describe('human readable', function () {
-  it('should correctly convert to IEC', function () {
-    var options = false
+describe('to()', function () {
+  it('should fallback to B when no unit is passed', function () {
+    assert(filesize(b).to()       === '1.00')
+  })
 
-    filesize( b).to('B', options).should.equal(1)
-    filesize(kb).to('B', options).should.equal(1024)
-    filesize(mb).to('KB', options).should.equal(1024)
-    filesize(gb).to('MB', options).should.equal(1024)
-    filesize(tb).to('GB', options).should.equal(1024)
+  it('should correctly convert to IEC', function () {
+    assert(filesize( b).to('B')   === '1.00')
+    assert(filesize(kb).to('B')   === '1024.00')
+    assert(filesize(mb).to('KB')  === '1024.00')
+    assert(filesize(gb).to('MB')  === '1024.00')
+    assert(filesize(tb).to('GB')  === '1024.00')
   })
 
   it('should correctly convert to SI', function () {
-    var options = true
-
-    filesize( b).to('B', options).should.equal(1)
-    filesize(kb).to('B', options).should.equal(1024)
-    filesize(mb).to('KB', options).should.equal(1048.58)
-    filesize(gb).to('MB', options).should.equal(1073.74)
-    filesize(tb).to('GB', options).should.equal(1099.51)
+    assert(filesize( b).to('B', 'si')   === '1.00')
+    assert(filesize(kb).to('B', 'si')   === '1024.00')
+    assert(filesize(mb).to('KB', 'si')  === '1048.58')
+    assert(filesize(gb).to('MB', 'si')  === '1073.74')
+    assert(filesize(tb).to('GB', 'si')  === '1099.51')
   })
 })
