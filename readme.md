@@ -118,7 +118,7 @@ filesize(186457865).to('MB');
 
 ```javascript
 // outputs: 186.46
-filesize(186457865).to('MB', true);
+filesize(186457865).to('MB', 'si');
 ```
 
 ### size.calculate(String spec) -> Object
