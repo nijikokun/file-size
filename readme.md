@@ -1,4 +1,4 @@
-# File-size.js
+# file-size
 
 ![filesize](http://puu.sh/5JspS.png)
 
